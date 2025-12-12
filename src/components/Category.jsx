@@ -20,7 +20,7 @@ const Category = ({category,setCategory}) => {
         <div 
         key={c.id}
         onClick={()=>setCategory(c.name)}
-        className={`size-35 rounded-2xl shadow-2xl flex flex-col gap-2.5 items-center justify-center
+        className={`size-35 rounded-2xl shadow-2xl flex flex-col gap-2.5 items-center justify-center cursor-pointer
         ${category===c.name  ?  
             "bg-green-300 scale-105" : "bg-white hover:bg-green-200 hover:scale-105"}
         `}>

@@ -3,7 +3,7 @@ import { MdFastfood } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { LuShoppingBag } from "react-icons/lu";
 
-const Navbar = () => {
+const Navbar = ({input,setInput}) => {
   return (
     <div className='w-full flex items-center justify-between p-5'>
       <div className='size-15 flex items-center justify-center rounded-2xl shadow-2xl bg-white'>
@@ -13,6 +13,8 @@ const Navbar = () => {
         <IoSearch className='size-7 text-green-700'  />
         <input 
         type="text" 
+        value={input}
+        onChange={(e)=>setInput(e.target.value)}
          className="border-none outline-none pl-5 text-xl text-gray-500"
          placeholder='Seach Something......'
         />
