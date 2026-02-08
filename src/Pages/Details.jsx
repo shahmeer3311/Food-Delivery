@@ -25,9 +25,9 @@ const Details = () => {
   const youtubeId = meal.strYoutube?.split("v=")[1];
 
   return (
-    <div className="w-full h-screen bg-black/90 mx-auto">
+    <div className="w-full min-h-screen bg-black mx-auto pb-15 px-5">
       
-      <div className='w-full h-10 flex items-center gap-15 pt-10 border-b-2 pb-10 border-gray-300 text-white'>
+      <div className='w-full h-10 flex items-center gap-15 pt-10 border-b-1 pb-10  border-gray-300 text-white'>
         <IoMdArrowBack 
           onClick={() => navigate(-1)}
           className='size-8 ml-5 cursor-pointer' 
@@ -62,11 +62,21 @@ const Details = () => {
           )}
 
         </div>
-
       </div>
 
       <div className='text-white px-5'>
-        <p className="text-lg mb-4">{meal.strInstructions}</p>
+        <h1 className='text-3xl italic p-3'>Recipe:</h1>
+       <ul className='list-disc list-inside space-y-2 text-lg'>
+        {meal.strInstructions
+        .split(".")
+        .filter(step=>step.trim().length>0)
+        .map((step,index)=>(
+          <li key={index}>
+            {step.trim()}.
+          </li>
+        ))
+        }
+       </ul>
       </div>
     </div>
   );

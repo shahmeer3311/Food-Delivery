@@ -3,11 +3,16 @@ import axios from "axios";
 import { FaLeaf, FaDrumstickBite, FaStar } from "react-icons/fa";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import {AddItems} from "../redux/cartSlice"
 
 const RecipeGrid = ({ category, input }) => {
   const [apiData, setApiData] = useState([]);
   const [hovered, setHovered] = useState(null);
+
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+
   console.log(input);
   useEffect(() => {
     const fetchData = async () => {
@@ -92,6 +97,17 @@ const RecipeGrid = ({ category, input }) => {
     return ingredients;
   };
 
+  const handleAdd=(item)=>{
+     dispatch(AddItems({
+      id: item.idMeal,
+        title: item.strMeal,
+        category: item.strCategory,
+        image: item.strMealThumb,
+        price: item.price || (Math.random() * 20 + 5).toFixed(2),
+        rating: item.rating,
+     }))
+  }
+
   return (
     <div className="w-full grid grid-cols-4 gap-2 mt-15 px-5">
       {apiData.map((meal) => {
@@ -128,7 +144,9 @@ const RecipeGrid = ({ category, input }) => {
               <p className="text-green-600">${meal.price}</p>
             </div>
 
-            <button className="w-[90%] h-10 ml-3 rounded-full bg-green-600 text-white mt-3">
+            <button 
+            onClick={()=>handleAdd(meal)}
+            className="w-[90%] h-10 ml-3 rounded-full bg-green-600 text-white mt-3 cursor-pointer">
               Add to Cart
             </button>
             {hovered === meal.idMeal && (
